@@ -64,7 +64,7 @@ class App extends Component {
   };
 
   render() {
-    console.log(classes)
+    
 
     let persons = null;
     let btnClass = '';
