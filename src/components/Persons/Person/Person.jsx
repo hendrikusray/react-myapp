@@ -22,6 +22,7 @@ const person = (props) => {
     <StyledDiv>
       <p onClick={props.click}>
         I&apos;m
+        {' '}
         {props.name}
         {' '}
         and I am
