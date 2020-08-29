@@ -9,6 +9,7 @@ const person = (props) => {
     <div className={classes.Person}>
       <p onClick={props.click}>
         I&apos;m
+        {' '}
         {props.name}
         {' '}
         and I am
