@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import withClass from '../../hoc/WithClass';
+import Aux from '../../hoc/Auxillary';
 import classes from './Cockpit.css';
 import AuthContext from '../../context/auth-context';
 
@@ -42,14 +43,14 @@ const Cockpit = (props) => {
   }
 
   return (
-    <div className={classes.Cockpit}>
+    <Aux>
       <h1>{title}</h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
       <button type="button" ref={toggleBtnRef} className={btnClass} onClick={clicked}>
         Toggle Persons
       </button>
       <button type="button" onClick={authContext.login}>Log in</button>
-    </div>
+    </Aux>
   );
 };
 
@@ -60,4 +61,4 @@ Cockpit.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default React.memo(Cockpit);
+export default React.memo(withClass(Cockpit, classes.Cockpit));
