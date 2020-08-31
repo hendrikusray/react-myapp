@@ -1,6 +1,5 @@
-/* eslint-disable */
 // import './Person.css';
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -15,25 +14,28 @@ const StyledDiv = styled.div`
     width : 450px;
   }
 
-`
+`;
+/* eslint-disable */ 
+class Person extends Component {
+  render() {
+    return (
+      <StyledDiv>
+        <p onClick={this.props.click}>
+          I&apos;m
+          {' '}
+          {this.props.name}
+          {' '}
+          and I am
+          {' '}
+          {this.props.age}
+          {' '}
+          years old!
+        </p>
+        <p>{this.props.children}</p>
+        <input type="text" onChange={this.props.changed} value={this.props.name} />
+      </StyledDiv>
+    );
+  }
+}
 
-const person = (props) => {
-  return(
-    <StyledDiv>
-      <p onClick={props.click}>
-        I&apos;m
-        {' '}
-        {props.name}
-        {' '}
-        and I am
-        {props.age}
-        {' '}
-        years old!
-      </p>
-      <p>{props.children}</p>
-      <input type="text" onChange={props.changed} value={props.name} />
-    </StyledDiv>
-  )
-};
-
-export default person;
+export default Person;

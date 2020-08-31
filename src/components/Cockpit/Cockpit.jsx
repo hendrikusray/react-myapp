@@ -4,7 +4,9 @@ import classes from './Cockpit.css';
 // import persons from '../Persons/Persons';
 
 const cockpit = (props) => {
-  const { showPersons, persons, clicked } = props;
+  const {
+    showPersons, persons, clicked, title,
+  } = props;
 
   const assignedClasses = [];
   let btnClass = '';
@@ -22,7 +24,7 @@ const cockpit = (props) => {
 
   return (
     <div className={classes.Cockpit}>
-      <h1>Hi, I&apos;m a React App</h1>
+      <h1>{title}</h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
       <button type="button" className={btnClass} onClick={clicked}>
         Toggle Persons
@@ -35,6 +37,7 @@ cockpit.propTypes = {
   showPersons: PropTypes.bool.isRequired,
   persons: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequried, name: PropTypes.string, age: PropTypes.number })).isRequired,
   clicked: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default cockpit;

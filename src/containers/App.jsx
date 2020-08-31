@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React, { Component , Fragment } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
@@ -82,6 +82,7 @@ class App extends Component {
       <div className={classes.App}>
 
         <Cockpit 
+          title   = {this.props.titlePass}
           persons = {this.state.persons}
           showPersons = {this.state.showPersons}
           clicked = {this.togglePersonsHandler}
