@@ -1,43 +1,63 @@
-import React from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
-import classes from './Cockpit.css';
-// import persons from '../Persons/Persons';
 
-const cockpit = (props) => {
+import classes from './Cockpit.css';
+import AuthContext from '../../context/auth-context';
+
+const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
   const {
-    showPersons, persons, clicked, title,
+    showPersons, personsLength, title, clicked,
   } = props;
+  console.log(authContext.authenticated);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+
+    toggleBtnRef.current.click();
+    return () => {
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => {
+      console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+    };
+  });
 
   const assignedClasses = [];
   let btnClass = '';
-
   if (showPersons) {
     btnClass = classes.Red;
   }
 
-  if (persons.length <= 2) {
-    assignedClasses.push(classes.red); // classes = ['red']
+  if (personsLength <= 2) {
+    assignedClasses.push(classes.red);
   }
-  if (persons.length <= 1) {
-    assignedClasses.push(classes.bold); // classes = ['red', 'bold']
+  if (personsLength <= 1) {
+    assignedClasses.push(classes.bold);
   }
 
   return (
     <div className={classes.Cockpit}>
       <h1>{title}</h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
-      <button type="button" className={btnClass} onClick={clicked}>
+      <button type="button" ref={toggleBtnRef} className={btnClass} onClick={clicked}>
         Toggle Persons
       </button>
+      <button type="button" onClick={authContext.login}>Log in</button>
     </div>
   );
 };
 
-cockpit.propTypes = {
+Cockpit.propTypes = {
   showPersons: PropTypes.bool.isRequired,
-  persons: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string.isRequried, name: PropTypes.string, age: PropTypes.number })).isRequired,
+  personsLength: PropTypes.number.isRequired,
   clicked: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };
 
-export default cockpit;
+export default React.memo(Cockpit);
